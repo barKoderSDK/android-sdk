@@ -453,5 +453,5 @@ fun setVibrateOnSuccessEnabled(vibrateOnSuccess: Boolean)
 
 Find out more:
 
-[~Kotlin~](https://developer.android.com/courses/kotlin-bootcamp/overview?gclid=CjwKCAjwysipBhBXEiwApJOcu_FgLOiD4t2WqUFvcCmPsPiGYXldca0N8zz5VNdsUBgFrsYbhfrJFhoCSRYQAvD_BwE&gclsrc=aw.ds) 
-[~Kotlin~ ~Tutorial~](https://www.youtube.com/watch?v=BCSlZIUj18Y&ab_channel=AppDevNotes) 
+[Barcode Scanner SDK](https://barkoder.com/barcode-scanner-sdk) 
+

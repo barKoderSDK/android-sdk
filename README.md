@@ -76,6 +76,381 @@ bkdView.startScanning(this)
 ```
 
 
+# API reference for barKoder's Android Barcode Reader SDK
+
+## BarkoderView
+
+
+Set camera frames callback if you want to receive the frames/images only without decoding them and do your own work with the frames.
+Don't forget to close the image at the end
+- @param previewFramesCallback
+
+```kotlin
+fun setPreviewFramesCallback(previewFramesCallback: BarkoderPreviewFramesCallback)
+```
+
+
+
+## getMaxZoomFactor
+### 
+Get maximum zoom factor that can be set for the camera preview
+Zoom factor is received in MaxZoomAvailableCallback
+- @param callback MaxZoomAvailableCallback
+
+```kotlin
+fun getMaxZoomFactor(callback: MaxZoomAvailableCallback)
+```
+
+## setZoomFactor
+### 
+
+Set zoom factor for the camera preview. If preview session is already active this zoom factor will be set only for this session,
+otherwise initial zoom will be set. Every next preview session will be started with this zoom factor.
+- @param zoomFactor [1, maxZoomFactor]. Default value is 1
+
+```kotlin
+fun setZoomFactor(zoomFactor: Int)
+```
+
+## isFlashAvailable
+### 
+Check if current mobile device has flash available
+Result is received in FlashAvailableCallback.
+- @param callback
+
+```kotlin
+fun isFlashAvailable(callback: FlashAvailableCallback)
+```
+
+
+## setFlashEnabled
+### 
+Turn flash ON/OFF
+If preview session is already active this state be set only for active session,
+otherwise the initial flash state is set. Every next preview session will be started with this state.
+- @param enabled [true, false]. Default value is false.
+
+```kotlin
+fun setFlashEnabled(enabled: Boolean)
+```
+
+## stopCamera
+### 
+Stop the camera preview session and decoding if active
+
+```kotlin
+fun stopCamera()
+```
+
+## startScanning
+### 
+Start the camera preview (if is not already running) and the scanning process
+- @param resultCallback @throw NullPointerException if BarkoderView config is not set
+
+```kotlin
+fun startScanning(resultCallback: BarkoderResultCallback)
+```
+
+## stopScanning
+### 
+Stop the scanning process and the camera preview
+
+```kotlin
+fun stopScanning()
+```
+
+## pauseScanning
+### 
+Pause only the scanning process. Camera preview is still running
+
+```kotlin
+fun pauseScanning()
+```
+
+## BarkoderConfig
+##
+ 
+## getDecoderConfig
+### 
+Get the decoder config object. With this object you can enable/disable decoders (barcode types) or configure each one of them
+@return Barkoder.Config object
+
+```kotlin
+fun getDecoderConfig(): Barkoder.Config
+```
+
+## getLocationLineColor
+### 
+Get the location line color as integer
+- @return location line color
+
+```kotlin
+fun getLocationLineColor(): Int
+```
+
+## setLocationLineColor
+### 
+Set the location line color as integer.
+This line is used for marking the scanned barcode in the image result
+- @param locationLineColor [valid color representation as integer]. Default value is Color.GREEN
+
+
+```kotlin
+fun setLocationLineColor(locationLineColor: Int)
+```
+## getLocationLineWidth
+### 
+Get the location line width as float.
+- @return location line width
+
+```kotlin
+fun getLocationLineWidth(): Float
+```
+
+## setLocationLineWidth
+### 
+Set the location line width as float.
+This line is used for marking the scanned barcode in the image result
+- @param locationLineWidth. Default value is 4.0
+
+```kotlin
+fun setLocationLineWidth(locationLineWidth: Float)
+```
+
+## getRoiLineColor
+### 
+Get the region of interest line color as integer
+- @return roi line color
+
+```kotlin
+fun getRoiLineColor(): Int
+```
+
+## roiLineColor
+### 
+Set the region of interest line color as integer
+- @param roiLineColor [valid color representation as integer]. Default value is Color.RED
+
+```kotlin
+fun setRoiLineColor(roiLineColor: Int)
+```
+
+## getRoiLineWidth
+### 
+Get the region of interest line width as float
+- @return roi line width
+
+```kotlin
+fun getRoiLineWidth(): Float
+```
+
+## setRoiLineWidth
+### 
+
+Set the region of interest line width as float
+- @param roiLineWidth. Default value is 3.0
+
+```kotlin
+fun setRoiLineWidth(roiLineWidth: Float)
+```
+
+## getRoiOverlayBackgroundColor
+### 
+
+Get the region of interest background color as integer
+- @return roi overlay background color
+
+```kotlin
+fun getRoiOverlayBackgroundColor(): Int
+```
+
+## roiOverlayBackgroundColor
+### 
+Set the region of interest line color as integer
+- @param roiOverlayBackgroundColor [valid color representation as integer]. Default value is 40% transparency
+
+```kotlin
+fun setRoiOverlayBackgroundColor(roiOverlayBackgroundColor: Int)
+```
+
+## isCloseSessionOnResultEnabled
+### 
+Check if camera preview session will be closed when barcode is scanned
+- @return true if preview will be closed, false otherwise
+
+```kotlin
+fun isCloseSessionOnResultEnabled(): Boolean
+```
+
+## setCloseSessionOnResultEnabled
+### 
+Set if camera preview session should be closed when barcode is scanned
+- @param closeSessionOnResultEnabled [false, true]. Default is true
+
+```kotlin
+fun setCloseSessionOnResultEnabled(closeSessionOnResultEnabled: Boolean)
+```
+
+## isImageResultEnabled
+### 
+Check if the image result is enabled.
+Image result is received in BarkoderResultCallback as Bitmap
+- @return true if enabled or false if is not enabled
+
+```kotlin
+fun isImageResultEnabled(): Boolean
+```
+
+## setImageResultEnabled
+### 
+Set if image result is enabled, otherwise null will be received
+- @param imageResultEnabled [false, true]. Default is false
+
+```kotlin
+fun setImageResultEnabled(imageResultEnabled: Boolean)
+```
+
+## isLocationInImageResultEnabled
+### 
+Check if barcode location in the image result is enabled.
+If enabled, barcode in the result image will be marked
+- @return true if enabled or false if is not enabled
+
+```kotlin
+fun isLocationInImageResultEnabled()
+```
+
+## setLocationInImageResultEnabled
+### 
+Set if scanned barcode in the image result should be marked
+- @param locationInImageResultEnabled [false, true]. Default is false
+
+```kotlin
+fun setLocationInImageResultEnabled(locationInImageResultEnabled: Boolean)
+```
+
+Get active region of interest
+@return Barkoder.BKRect object 
+
+```kotlin
+fun getRegionOfInterest(): Barkoder.BKRect
+```
+
+Set region of interest in percentage
+@param left. Default 3%
+@param top. Default 20%
+@param width. Default 94%
+@param height. Default 60%
+@throw IllegalArgumentException if input params are not valid
+
+```kotlin
+fun setRegionOfInterest(left: Float, top: Float, width: Float, height: Float)
+```
+
+
+Get maximum threads that are used for the decoding process
+@return threads number as integer
+
+```kotlin
+fun GetThreadsLimit(): Int
+```
+
+Set maximum threads that will be used for the decoding process
+@param threadsLimit [1, max threads available]
+@throw IllegalArgumentException if input param is greater than maximum threads available on that device
+
+```kotlin
+fun SetThreadsLimit(threadsLimit: Int)
+```
+
+
+Check if barcode location in preview is enabled.
+If enabled, scanned barcode will be marked on the preview screen for short time
+@return true if enabled or false if is not enabled
+
+```kotlin
+fun isLocationInPreviewEnabled(): Boolean
+```
+
+
+Set if scanned barcode should be marked on the preview screen for short time
+@param locationInPreviewEnabled [true, false]. Default is true
+
+```kotlin
+fun setLocationInPreviewEnabled(locationInPreviewEnabled: Boolean)
+```
+
+
+Check if the camera preview can be zoomed with pinch
+@return true if enabled or false if is not enabled
+
+```kotlin
+fun isPinchToZoomEnabled(): Boolean
+```
+
+Enable or disable pinch to zoom on the camera preview
+@param pinchToZoomEnabled [true, false]. Default is false
+
+```kotlin
+fun setPinchToZoomEnabled(pinchToZoomEnabled: Boolean)
+```
+
+Check if ROI is visible on the preview screen
+@return true if visible or false otherwise
+
+```kotlin
+fun isRegionOfInterestVisible(): Boolean
+```
+
+Set if ROI should be visible on the preview screen
+@param regionOfInterestVisible [true, false]. Default is true
+
+```kotlin
+fun setRegionOfInterestVisible(regionOfInterestVisible: Boolean)
+```
+
+Get the active resolution. It can be Normal(HD), or HIGH(Full HD)
+@return BarkoderResolution object
+
+```kotlin
+fun getBarkoderResolution(): BarkoderResolution
+```
+
+Set the camera resolution that will be used while scanning
+@param barkoderResolution [BarkoderResolution.NORMAL, BarkoderResolution.HIGH]. Default is BarkoderResolution.NORMAL
+
+```kotlin
+fun setBarkoderResolution(barkoderResolution: BarkoderResolution)
+```
+
+Check if device will beep on successful scan
+@return true if enabled or false if is not enabled
+
+```kotlin
+fun isBeepOnSuccessEnabled(): Boolean
+```
+
+Set if device should beep on successful scan
+@param beepOnSuccess [true, false]. Default is true
+
+```kotlin
+fun setBeepOnSuccessEnabled(beepOnSuccess: Boolean)
+```
+
+Check if device will vibrate on successful scan
+@return true if enabled or false if is not enabled
+
+```kotlin
+fun isVibrateOnSuccessEnabled(): Boolean
+```
+
+Set if device should vibrate on successful scan
+@param vibrateOnSuccess [true, false]. Default is true
+
+```kotlin
+fun setVibrateOnSuccessEnabled(vibrateOnSuccess: Boolean)
+```
+
 Find out more:
 
 [~Kotlin~](https://developer.android.com/courses/kotlin-bootcamp/overview?gclid=CjwKCAjwysipBhBXEiwApJOcu_FgLOiD4t2WqUFvcCmPsPiGYXldca0N8zz5VNdsUBgFrsYbhfrJFhoCSRYQAvD_BwE&gclsrc=aw.ds) 

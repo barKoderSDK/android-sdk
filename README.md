@@ -100,6 +100,8 @@ bkdView.startScanning(this)
 
 ## Quick Start Example
 
+This code would go in your main activity, and of course it will be different for your use case, but generally it's a good starting point to have.
+
 ```java
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
@@ -257,9 +259,12 @@ class MainActivity : AppCompatActivity(), BarkoderResultCallback {
 }
 ```
 
+
 ## API reference for barKoder's Android Barcode Reader SDK
 
-### BarkoderView
+Reference for the **BarkoderView** class
+
+### setPreviewFramesCallback
 
 
 Set camera frames callback if you want to receive the frames/images only without decoding them and do your own work with the frames.
